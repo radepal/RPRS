@@ -1,4 +1,4 @@
-package RPRS
+package main
 
 import (
 	"fmt"
@@ -8,14 +8,17 @@ import (
 func loadDefaultSettings() {
 	viper.SetDefault("LogPath", "logs/")
 	viper.SetDefault("Port", ":1323")
+	viper.SetDefault("UploadRpmPath", "uploads/")
 }
 
 func initializeConfig() error {
-	viper.AutomaticEnv()
+	//viper.AutomaticEnv()
+	viper.SetConfigType("json")
 	viper.SetEnvPrefix("RPRS")
-	viper.SetConfigName("config.json") // name of config file
+	viper.SetConfigName("config") // name of config file
 	viper.AddConfigPath(".")           // optionally look for config in the working directory
 	loadDefaultSettings()
+
 	err := viper.ReadInConfig() // Find and read the config file
 	if err != nil {             // Handle errors reading the config file
 		panic(fmt.Errorf("Fatal error config file: %s \n", err))

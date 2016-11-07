@@ -1,14 +1,15 @@
-package RPRS
+package main
 
 import (
 	"fmt"
+	"os"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
 	"github.com/labstack/echo/middleware"
 	"github.com/spf13/viper"
 	"io"
 	"net/http"
-	"os"
+	"path/filepath"
 )
 
 func upload(c echo.Context) error {
@@ -30,8 +31,12 @@ func upload(c echo.Context) error {
 	}
 	defer src.Close()
 
+	// Crate directory
+	path := filepath.Join(viper.GetString("UploadRpmPath"), repo)
+	os.MkdirAll(path, os.ModeDir)
+
 	// Destination
-	dst, err := os.Create(file.Filename)
+	dst, err := os.Create(path + string(os.PathSeparator) + file.Filename)
 	if err != nil {
 		return err
 	}
