@@ -1,54 +1,14 @@
 package main
 
 import (
-	"fmt"
-	"os"
+	"RPRS/controller"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
 	"github.com/labstack/echo/middleware"
 	"github.com/spf13/viper"
-	"io"
 	"net/http"
-	"path/filepath"
 )
 
-func upload(c echo.Context) error {
-	// Read form fields
-	repo := c.FormValue("repo")
-
-	//-----------
-	// Read file
-	//-----------
-
-	// Source
-	file, err := c.FormFile("data")
-	if err != nil {
-		return err
-	}
-	src, err := file.Open()
-	if err != nil {
-		return err
-	}
-	defer src.Close()
-
-	// Crate directory
-	path := filepath.Join(viper.GetString("UploadRpmPath"), repo)
-	os.MkdirAll(path, os.ModeDir)
-
-	// Destination
-	dst, err := os.Create(path + string(os.PathSeparator) + file.Filename)
-	if err != nil {
-		return err
-	}
-	defer dst.Close()
-
-	// Copy
-	if _, err = io.Copy(dst, src); err != nil {
-		return err
-	}
-
-	return c.HTML(http.StatusOK, fmt.Sprintf("<p>File %s uploaded successfully with fields name=%s .</p>", file.Filename, repo))
-}
 func main() {
 
 	initializeConfig()
@@ -57,11 +17,18 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	e.Use(middleware.Gzip())
+	e.Use(middleware.Secure())
 	e.Use(middleware.Static("public"))
 
-	e.POST("/upload", upload)
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World!")
 	})
+	// Login route
+	e.POST("/login", controller.Login)
+	// Restricted group
+	r := e.Group("/rpm")
+	r.Use(middleware.JWT([]byte(viper.GetString("Secret"))))
+	r.PUT("/upload", controller.Upload)
+
 	e.Run(standard.New(viper.GetString("Port")))
 }

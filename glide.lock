@@ -1,14 +1,14 @@
-hash: 642f8ba1bb9171f1c99e3d1426996833e2c8e980e10953e8c09fdf55b2933e82
-updated: 2016-11-05T22:05:34.710319665+01:00
+hash: 05f74cb1e7ebbe21ff23d545cea705cfdc94b16f24dda40dae2713ca56979dd1
+updated: 2016-11-09T20:35:34.855362255+01:00
 imports:
 - name: github.com/cavaliercoder/go-rpm
   version: 067941e17bc40982becb50f059e946e9df9c7dbc
 - name: github.com/dgrijalva/jwt-go
-  version: 9ed569b5d1ac936e6494082958d63a6aa4fff99a
+  version: d2709f9f1f31ebcda9651b03077758c1f3a0018c
 - name: github.com/fsnotify/fsnotify
   version: fd9ec7deca8bf46ecd2a795baaacf2b3a9be1197
 - name: github.com/hashicorp/hcl
-  version: f74cf8281543a0797d7b4ab7d88e76e7ba125308
+  version: 6e968a3fcdcbab092f5307fd0d85479d5af1e4dc
   subpackages:
   - hcl/ast
   - hcl/parser
@@ -74,7 +74,7 @@ imports:
   - ed25519/internal/edwards25519
   - ssh
 - name: golang.org/x/net
-  version: 55a3084c9119aeb9ba2437d595b0a7e9cb635da9
+  version: 569280fa63be4e201b975e5411e30a92178f0118
   subpackages:
   - context
 - name: golang.org/x/sys
