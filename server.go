@@ -1,7 +1,7 @@
 package main
 
 import (
-	"RPRS/controller"
+	"github.com/radepal/RPRS/controller"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
 	"github.com/labstack/echo/middleware"

@@ -19,6 +19,7 @@ func initializeConfig() error {
 	viper.SetEnvPrefix("RPRS")
 	viper.SetConfigName("config") // name of config file
 	viper.AddConfigPath(".")      // optionally look for config in the working directory
+	viper.AddConfigPath("/etc/RPRS")
 	loadDefaultSettings()
 	viper.WatchConfig()
 	viper.OnConfigChange(func(e fsnotify.Event) {
