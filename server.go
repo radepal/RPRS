@@ -1,10 +1,9 @@
 package main
 
 import (
-	"github.com/radepal/RPRS/controller"
 	"github.com/labstack/echo"
-	"github.com/labstack/echo/engine/standard"
 	"github.com/labstack/echo/middleware"
+	"github.com/radepal/RPRS/controller"
 	"github.com/spf13/viper"
 	"net/http"
 )
@@ -18,7 +17,7 @@ func main() {
 	e.Use(middleware.Recover())
 	e.Use(middleware.Gzip())
 	e.Use(middleware.Secure())
-	e.Use(middleware.Static("public"))
+	e.Static("/public", "public")
 
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World!")
@@ -30,5 +29,5 @@ func main() {
 	r.Use(middleware.JWT([]byte(viper.GetString("Secret"))))
 	r.PUT("/upload", controller.Upload)
 
-	e.Run(standard.New(viper.GetString("Port")))
+	e.Start(viper.GetString("Port"))
 }

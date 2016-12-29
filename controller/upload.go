@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"fmt"
+	"github.com/cavaliercoder/go-rpm"
 	"github.com/labstack/echo"
 	"github.com/spf13/viper"
 	"io"
@@ -9,6 +9,14 @@ import (
 	"os"
 	"path/filepath"
 )
+
+// User
+type RPMInfo struct {
+	Repo    string `json:"repo" xml:"repo"`
+	Name    string `json:"name" xml:"name"`
+	Size    uint64 `json:"size" xml:"size"`
+	Version string `json:"version" xml:"version"`
+}
 
 func Upload(c echo.Context) error {
 	// Read form fields
@@ -31,7 +39,7 @@ func Upload(c echo.Context) error {
 
 	// Crate directory
 	path := filepath.Join(viper.GetString("UploadRpmPath"), repo)
-	os.MkdirAll(path, os.ModeDir)
+	os.MkdirAll(path, os.ModeDir|os.ModePerm)
 
 	// Destination
 	dst, err := os.Create(path + string(os.PathSeparator) + file.Filename)
@@ -45,5 +53,15 @@ func Upload(c echo.Context) error {
 		return err
 	}
 
-	return c.JSON(http.StatusOK, fmt.Sprintf("File %s uploaded successfully to repo %s", file.Filename, repo))
+	p, err := rpm.OpenPackageFile(path + string(os.PathSeparator) + file.Filename)
+	if err != nil {
+		return err
+	}
+	rpmi := &RPMInfo{
+		Repo:    repo,
+		Name:    p.Name(),
+		Size:    p.Size(),
+		Version: p.RPMVersion(),
+	}
+	return c.JSON(http.StatusOK, rpmi)
 }
