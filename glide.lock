@@ -1,8 +1,14 @@
-hash: 0012d7a1fcab935a1c01a35848568644e769c559c0b05c13ae28225ed66f28c6
-updated: 2016-12-29T09:52:32.484661311+01:00
+hash: 85f4d19c181ba7c15dddeaed864deb6f9da191a3130f37f993844b2bf1389beb
+updated: 2016-12-31T00:11:24.794814803+01:00
 imports:
 - name: github.com/cavaliercoder/go-rpm
   version: 067941e17bc40982becb50f059e946e9df9c7dbc
+- name: github.com/cavaliercoder/grab
+  version: e403b038e10c3c6aaf022ab0f8502bd659604140
+- name: github.com/cavaliercoder/y10k
+  version: 3965988a98f8f7b999e3b7713f64c8eb0e13445a
+  subpackages:
+  - yum
 - name: github.com/dgrijalva/jwt-go
   version: d2709f9f1f31ebcda9651b03077758c1f3a0018c
 - name: github.com/fsnotify/fsnotify
@@ -35,12 +41,16 @@ imports:
   version: d228849504861217f796da67fae4f6e347643f15
 - name: github.com/mattn/go-isatty
   version: 30a891c33c7cde7b02a981314b4228ec99380cca
+- name: github.com/mattn/go-sqlite3
+  version: ca5e3819723d8eeaf170ad510e7da1d6d2e94a08
 - name: github.com/mitchellh/mapstructure
   version: bfdb1a85537d60bc7e954e600c250219ea497417
 - name: github.com/pelletier/go-buffruneio
   version: df1e16fde7fc330a0ca68167c23bf7ed6ac31d6d
 - name: github.com/pelletier/go-toml
   version: 017119f7a78a0b5fc0ea39ef6be09f03acf3345d
+- name: github.com/pivotal-golang/bytefmt
+  version: b12c1522f4cbb5f35861bd5dd2c39a4fa996441a
 - name: github.com/spf13/afero
   version: 2f30b2a92c0e5700bcfe4715891adb1f2a7a406d
   subpackages:
@@ -85,4 +95,6 @@ imports:
   - unicode/norm
 - name: gopkg.in/yaml.v2
   version: a5b47d31c556af34a302ce5d659e6fea44d90de0
+- name: xi2.org/x/xz
+  version: 19aeb13c4e7cb6bd3188dfede73840f33455425a
 testImports: []

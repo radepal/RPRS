@@ -24,6 +24,7 @@ func main() {
 	})
 	// Login route
 	e.POST("/login", controller.Login)
+	e.POST("/search", controller.Search)
 	// Restricted group
 	r := e.Group("/rpm")
 	r.Use(middleware.JWT([]byte(viper.GetString("Secret"))))
