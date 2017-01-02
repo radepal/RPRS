@@ -1,4 +1,4 @@
-package: .
+package: github.com/radepal/RPRS
 import:
 - package: github.com/labstack/echo
   version: ^3.0.0
@@ -8,12 +8,9 @@ import:
 - package: github.com/spf13/viper
 - package: github.com/dgrijalva/jwt-go
   version: ^3.0.0
-- package: github.com/cavaliercoder/y10k
-  version: native_rpm
-  subpackages:
-  - yum
 - package: github.com/mattn/go-sqlite3
   version: v1.2.0
 - package: github.com/cavaliercoder/grab
 - package: github.com/pivotal-golang/bytefmt
 - package: xi2.org/x/xz
+- package: github.com/radepal/go-yum

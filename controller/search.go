@@ -4,7 +4,7 @@ import (
 	"github.com/labstack/echo"
 
 	"net/http"
-	"github.com/radepal/RPRS/yum"
+	"github.com/radepal/go-yum"
 	"fmt"
 	"os"
 

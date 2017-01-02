@@ -1,14 +1,10 @@
-hash: 85f4d19c181ba7c15dddeaed864deb6f9da191a3130f37f993844b2bf1389beb
-updated: 2016-12-31T00:11:24.794814803+01:00
+hash: 139b2b9dbb937bec34cb580e2b0f4ec483c84f0e41f48abd8d019dc613bec9d0
+updated: 2017-01-02T22:50:10.222186344+01:00
 imports:
 - name: github.com/cavaliercoder/go-rpm
   version: 067941e17bc40982becb50f059e946e9df9c7dbc
 - name: github.com/cavaliercoder/grab
   version: e403b038e10c3c6aaf022ab0f8502bd659604140
-- name: github.com/cavaliercoder/y10k
-  version: 3965988a98f8f7b999e3b7713f64c8eb0e13445a
-  subpackages:
-  - yum
 - name: github.com/dgrijalva/jwt-go
   version: d2709f9f1f31ebcda9651b03077758c1f3a0018c
 - name: github.com/fsnotify/fsnotify
@@ -51,6 +47,8 @@ imports:
   version: 017119f7a78a0b5fc0ea39ef6be09f03acf3345d
 - name: github.com/pivotal-golang/bytefmt
   version: b12c1522f4cbb5f35861bd5dd2c39a4fa996441a
+- name: github.com/radepal/go-yum
+  version: eba27148ce9f3ca27983b622b80d329cb30d1ba1
 - name: github.com/spf13/afero
   version: 2f30b2a92c0e5700bcfe4715891adb1f2a7a406d
   subpackages:
