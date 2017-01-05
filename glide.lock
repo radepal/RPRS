@@ -1,5 +1,5 @@
 hash: 139b2b9dbb937bec34cb580e2b0f4ec483c84f0e41f48abd8d019dc613bec9d0
-updated: 2017-01-02T22:50:10.222186344+01:00
+updated: 2017-01-05T19:24:08.258142547+01:00
 imports:
 - name: github.com/cavaliercoder/go-rpm
   version: 067941e17bc40982becb50f059e946e9df9c7dbc
@@ -48,7 +48,7 @@ imports:
 - name: github.com/pivotal-golang/bytefmt
   version: b12c1522f4cbb5f35861bd5dd2c39a4fa996441a
 - name: github.com/radepal/go-yum
-  version: eba27148ce9f3ca27983b622b80d329cb30d1ba1
+  version: 79160ab8e7c9e7fa245135376143aecdfd082bcb
 - name: github.com/spf13/afero
   version: 2f30b2a92c0e5700bcfe4715891adb1f2a7a406d
   subpackages:
