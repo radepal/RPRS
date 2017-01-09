@@ -1,19 +1,33 @@
 package controller
 
 import (
-	"github.com/labstack/echo"
-
-	"net/http"
-	"github.com/radepal/go-yum"
+	"errors"
 	"fmt"
+	"github.com/labstack/echo"
+	"github.com/radepal/go-yum"
+	"net/http"
 	"os"
 
+	"github.com/spf13/viper"
 )
 
 func Search(c echo.Context) error {
 
+	requestedrepo := c.Param("repo")
+	if !viper.IsSet("Repos") {
+		return errors.New("Missing Repos config")
+	}
+	repos := viper.Sub("Repos")
+	if !viper.IsSet("Repos") {
+		return errors.New("Missing Repos config")
+	}
+	if !repos.IsSet(requestedrepo) {
+		return errors.New(fmt.Sprintf("Missing repo %s config", requestedrepo))
+	}
+	repoconfig := repos.Sub(requestedrepo)
+
 	repo := yum.NewRepo()
-	baseurl := "http://mirror.centos.org/centos/7/os/x86_64/"
+	baseurl := repoconfig.GetString("baseurl")
 
 	repo.BaseURL = baseurl
 
@@ -22,7 +36,6 @@ func Search(c echo.Context) error {
 	if err != nil {
 		return err
 	}
-
 
 	// repo metadata is always found at the repodata/repomd.xml subpath
 	repomdurl := baseurl + "repodata/repomd.xml"
@@ -40,14 +53,14 @@ func Search(c echo.Context) error {
 		panic(err)
 	}
 
-	fmt.Printf("%v",repomd.Databases)
+	fmt.Printf("%v", repomd.Databases)
 
 	file, err := os.Open("cache/gen/primary.xml")
-	 if err != nil {
-		 panic(err)
-	 }
+	if err != nil {
+		panic(err)
+	}
 
-        defer file.Close()
+	defer file.Close()
 
 	// decode http stream into repo metadata struct
 	primarymeta, err := yum.ReadPrimaryMetadata(file)
