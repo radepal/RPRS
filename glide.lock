@@ -1,5 +1,5 @@
 hash: 139b2b9dbb937bec34cb580e2b0f4ec483c84f0e41f48abd8d019dc613bec9d0
-updated: 2017-01-05T19:24:08.258142547+01:00
+updated: 2017-01-16T18:56:03.950645489+01:00
 imports:
 - name: github.com/cavaliercoder/go-rpm
   version: 067941e17bc40982becb50f059e946e9df9c7dbc

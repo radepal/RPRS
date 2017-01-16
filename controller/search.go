@@ -14,6 +14,7 @@ import (
 func Search(c echo.Context) error {
 
 	requestedrepo := c.Param("repo")
+	requestedpackage := c.Param("package")
 	if !viper.IsSet("Repos") {
 		return errors.New("Missing Repos config")
 	}
@@ -37,24 +38,6 @@ func Search(c echo.Context) error {
 		return err
 	}
 
-	// repo metadata is always found at the repodata/repomd.xml subpath
-	repomdurl := baseurl + "repodata/repomd.xml"
-
-	// get repo metadata from url
-	resp, err := http.Get(repomdurl)
-	if err != nil {
-		panic(err)
-	}
-	defer resp.Body.Close()
-
-	// decode http stream into repo metadata struct
-	repomd, err := yum.ReadRepoMetadata(resp.Body)
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Printf("%v", repomd.Databases)
-
 	file, err := os.Open("cache/gen/primary.xml")
 	if err != nil {
 		panic(err)
@@ -69,5 +52,12 @@ func Search(c echo.Context) error {
 	}
 	fmt.Printf("Downloaded repository metadata revision %d\n", primarymeta.PackagesCount)
 
-	return c.JSON(http.StatusOK, primarymeta)
+	var result []string
+	packages := primarymeta.Packages
+	for _, element := range packages {
+		if element.Name() == requestedpackage {
+			result = append(result, element.String())
+		}
+	}
+	return c.JSON(http.StatusOK, result)
 }
