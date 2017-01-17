@@ -59,5 +59,9 @@ func Search(c echo.Context) error {
 			result = append(result, element.String())
 		}
 	}
-	return c.JSON(http.StatusOK, result)
+	type Response struct {
+		Result []string `json:"result"`
+	}
+	response := Response{Result: result}
+	return c.JSON(http.StatusOK, response)
 }
