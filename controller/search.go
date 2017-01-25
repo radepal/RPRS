@@ -31,14 +31,14 @@ func Search(c echo.Context) error {
 	baseurl := repoconfig.GetString("baseurl")
 
 	repo.BaseURL = baseurl
-
+	repo.ID = requestedrepo
 	// get cache for this repo
 	_, err := repo.CacheLocal("cache")
 	if err != nil {
 		return err
 	}
 
-	file, err := os.Open("cache/gen/primary.xml")
+	file, err := os.Open(fmt.Sprintf("cache/%s/gen/primary.xml", requestedrepo))
 	if err != nil {
 		panic(err)
 	}
